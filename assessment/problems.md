@@ -4,7 +4,14 @@ Follow the [assessment instructions](assessment.md) and [guidance](guidance.ipyn
 
 ## Problem 1: Data from yfinance
 
-Write a function called `get_data()` that downloads all hourly data for the previous five days for the five FAANG stocks: Facebook (META), Apple (AAPL), Amazon (AMZN), Netflix (NFLX), and Google (GOOG) using the [yfinance](https://github.com/ranaroussi/yfinance) Python package.
+Using the [yfinance](https://github.com/ranaroussi/yfinance) Python package, write a function called `get_data()` that downloads all hourly data for the previous five days for the five FAANG stocks:
+
+- Facebook (META)
+- Apple (AAPL)
+- Amazon (AMZN)
+- Netflix (NFLX)
+- Google (GOOG) 
+
 The function should save the data into a folder called `data` in the root of your repository using a filename with the format `YYYYMMDD-HHmmss.csv` where `YYYYMMDD` is the four-digit year (e.g. 2025), followed by the two-digit month (e.g. `09` for September), followed by the two digit day, and `HHmmss` is hour, minutes, seconds.
 Create the `data` folder if you don't already have one.
 
