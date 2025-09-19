@@ -10,7 +10,7 @@ Using the [yfinance](https://github.com/ranaroussi/yfinance) Python package, wri
 - Apple (AAPL)
 - Amazon (AMZN)
 - Netflix (NFLX)
-- Google (GOOG) 
+- Google (GOOG)
 
 The function should save the data into a folder called `data` in the root of your repository using a filename with the format `YYYYMMDD-HHmmss.csv` where `YYYYMMDD` is the four-digit year (e.g. 2025), followed by the two-digit month (e.g. `09` for September), followed by the two digit day, and `HHmmss` is hour, minutes, seconds.
 Create the `data` folder if you don't already have one.
