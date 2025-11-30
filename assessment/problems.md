@@ -25,7 +25,7 @@ Create the `plots` folder if you don't already have one.
 ## Problem 3: Script
 
 Create a Python script called `faang.py` in the root of your repository.
-Copy the above functions into it and it so that whenever someone at the terminal types `./faang.py`, the script runs, downloading the data and creating the plot.
+Copy the above functions into it and make it so that whenever someone at the terminal types `./faang.py`, the script runs, downloading the data and creating the plot.
 Note that this will require a shebang line and the script to be marked executable.
 Explain the steps you took in your notebook.
 
