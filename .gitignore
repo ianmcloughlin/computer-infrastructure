@@ -304,6 +304,3 @@ $RECYCLE.BIN/
 .python-version
 pyproject.toml
 uv.lock
-
-# GitHub
-.github
