@@ -1,0 +1,50 @@
+# Adapted from Grok:
+# https://grok.com/share/c2hhcmQtNA_299055a9-79bd-4951-8914-ab0e4050bcfc
+
+name: Run stocks.py and push changes
+
+on:
+  workflow_dispatch:   # allows manual runs
+  schedule:
+    # From: https://crontab.guru/#0_10_*_*_6
+    - cron: "0 10 * * 6"   # runs hourly (optional)
+
+permissions:
+  contents: write   # required to push changes
+
+jobs:
+  run-download:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # default token with write permissions
+          fetch-depth: 0                      # ensure full history for committing
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies (optional)
+        run: |
+          pip install -r requirements.txt || true
+
+      - name: Run stocks.py
+        run: |
+          python materials/stocks.py
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add -A
+          git diff --quiet --cached || git commit -m "Automated update from stocks.py"
+
+      - name: Push changes
+        run: |
+          git push origin HEAD
+
+

@@ -1,10 +1,10 @@
-ipython
+# ipython
 numpy
-scipy
-statsmodels
+# scipy
+# statsmodels
 matplotlib
 pandas
-seaborn
+# seaborn
 # sympy
 # nose
 # scikit-learn
