@@ -1,0 +1,86 @@
+# Adapted from Grok:
+# https://grok.com/share/c2hhcmQtNA_299055a9-79bd-4951-8914-ab0e4050bcfc
+#
+# Updated and commented by Claude (Anthropic):
+# https://claude.ai/chat/070d25d6-dfb9-4e04-86b6-1eceb4fd2ea0
+
+# The workflow name appears in the Actions tab on GitHub.
+name: Run stocks.py and push changes
+
+# --- Trigger conditions ---
+# 'on' defines what events cause this workflow to run.
+on:
+  workflow_dispatch:  # Allows a manual run from the GitHub Actions UI (useful for testing).
+  # schedule:
+    # Cron syntax: minute hour day-of-month month day-of-week
+    # "0 10 * * 6" means: at 10:00 UTC every Saturday.
+    # Reference: https://crontab.guru/#0_10_*_*_6
+  #  - cron: "0 10 * * 6"
+
+# --- Repository permissions ---
+# By default, the GITHUB_TOKEN only has read access; we need write access
+# to commit and push changes back to the repository.
+permissions:
+  contents: write
+
+# --- Jobs ---
+# A workflow is made up of one or more jobs that run in parallel by default.
+# Here we have a single job called 'run-download'.
+jobs:
+  run-download:
+    # The type of runner (virtual machine) that the job will execute on.
+    # 'ubuntu-latest' is the standard choice for most workflows.
+    runs-on: ubuntu-latest
+
+    # Steps are the individual tasks within a job, executed sequentially.
+    steps:
+
+      # Step 1: Check out the repository contents onto the runner.
+      # Without this, the runner has no access to our code.
+      - name: Checkout repository
+        uses: actions/checkout@v6   # v6 is the current stable release (updated from v4)
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # Built-in token; no manual secret setup needed.
+          fetch-depth: 0                      # Fetch the full git history, not just the latest
+                                              # commit. Required for git operations like committing.
+
+      # Step 2: Install a specific version of Python on the runner.
+      # The runner has Python pre-installed, but pinning the version avoids
+      # unexpected behaviour if GitHub updates its default.
+      - name: Set up Python
+        uses: actions/setup-python@v6   # v6 is the current stable release (updated from v5)
+        with:
+          python-version: "3.x"   # "3.x" resolves to the latest stable Python 3 release.
+                                  # Pin to e.g. "3.12" for fully reproducible builds.
+
+      # Step 3: Install Python dependencies from requirements.txt.
+      # The '|| true' means: if requirements.txt doesn't exist, don't fail the workflow —
+      # just skip silently. Remove it if requirements.txt is always expected to be present.
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt || true
+
+      # Step 4: Run the main script.
+      # This is the core purpose of the workflow — executing stocks.py,
+      # which presumably fetches/processes stock data and writes output files.
+      - name: Run stocks.py
+        run: |
+          python materials/stocks.py
+
+      # Step 5: Stage and commit any changes produced by stocks.py.
+      # We configure a git identity first (required by git even for automated commits).
+      # 'git diff --quiet --cached' checks whether there is anything staged to commit;
+      # if there are no changes, the commit command is skipped to avoid an error.
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add -A   # Stage all new, modified, and deleted files.
+          git diff --quiet --cached || git commit -m "Automated update from stocks.py"
+
+      # Step 6: Push the commit back to the remote repository.
+      # 'HEAD' refers to the current branch, so this works regardless of branch name
+      # (e.g. 'main' or 'master').
+      - name: Push changes
+        run: |
+          git push origin HEAD
