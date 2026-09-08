@@ -1,6 +1,5 @@
 # The Command Line Interface
 
-
 ## Overview
 
 - [MS-DOS: A Brief Introduction (linfo.org)](https://www.linfo.org/ms-dos.html)
@@ -10,8 +9,6 @@
 - [How to Use The Command Line, A First Lesson (linfo.org)](https://www.linfo.org/command_line_lesson_1.html)
 
 - [How to Use The Command Line, A Second Lesson (linfo.org)](https://www.linfo.org/command_line_lesson_2.html)
-
-
 
 ## Commands
 
@@ -47,7 +44,6 @@
 
 - [The su Command (linfo.org)](https://www.linfo.org/su.html)
 
-
 ## Extras
 
 - [How to Use vi (linfo.org)](https://www.linfo.org/vi/index.html)
@@ -57,4 +53,3 @@
 - [How to Create a First Shell Script (linfo.org)](https://www.linfo.org/create_shell_1.html)
 
 - [rename (plasmasturm.org)](http://plasmasturm.org/code/rename/)
-
