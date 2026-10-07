@@ -48,7 +48,7 @@
 
 - [How to Use vi (linfo.org)](https://www.linfo.org/vi/index.html)
 
-- [How to Create a Hierarchy of Directories (linfo.org)](https://www.linfo.org/make_directory_tree.html+-)
+- [How to Create a Hierarchy of Directories (linfo.org)](https://www.linfo.org/make_directory_tree.html)
 
 - [How to Create a First Shell Script (linfo.org)](https://www.linfo.org/create_shell_1.html)
 
