@@ -65,7 +65,7 @@ jobs:
       # which presumably fetches/processes stock data and writes output files.
       - name: Run stocks.py
         run: |
-          python materials/stocks.py
+          python notes/stocks.py
 
       # Step 5: Stage and commit any changes produced by stocks.py.
       # We configure a git identity first (required by git even for automated commits).
